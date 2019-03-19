@@ -1,0 +1,31 @@
+{
+  "name": "mariofrontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^3.9.2",
+    "@material-ui/icons": "^3.0.2",
+    "mobx": "^5.9.0",
+    "mobx-react": "^5.4.3",
+    "node-fetch": "^2.3.0",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-scripts-ts": "3.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts-ts start",
+    "build": "react-scripts-ts build",
+    "test": "react-scripts-ts test --env=jsdom",
+    "eject": "react-scripts-ts eject"
+  },
+  "devDependencies": {
+    "puppeteer": "1.13.0",
+    "typescript": "^3.3.3333",
+    "@types/jest": "^24.0.11",
+    "@types/node-fetch": "2.1.2",
+    "@types/node": "^11.11.3",
+    "@types/react": "^16.8.8",
+    "@types/react-dom": "^16.8.2",
+    "@types/puppeteer": "1.3.0"
+  }
+}
