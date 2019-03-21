@@ -5,7 +5,7 @@ services:
     image: mariorun
     container_name: mariorun
     environment:
-      API_URL: localhost:3000
+      API_URL: http://localhost:3000
     ports:
       - "3000:80"
     networks:
@@ -15,8 +15,8 @@ services:
   testservice:
     image: mariotest
     container_name: mariotest
-     depends_on:
-      - "mariorun"
+    depends_on:
+      - frontend
     networks:
       - app-network
 
