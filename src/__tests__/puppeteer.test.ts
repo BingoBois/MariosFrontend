@@ -37,7 +37,7 @@ describe(`Testing marios pizza with puppeteer`, () => {
   });
 
   test(`Can enter admin login`, async () => {
-    await page.goto(URL);
+    await page.goto(FRONT_URL);
     const waitResult = await itemExists(`.addcartbutton1`) && await itemExists(`.cartcard`);
     expect(waitResult).toBe(true);
     await page.type('#standard-name', 'IAmAdmin');
