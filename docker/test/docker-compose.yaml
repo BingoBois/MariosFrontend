@@ -1,0 +1,26 @@
+version: '3'
+services:
+  # Frontend
+  frontend:
+    image: mariorun
+    container_name: mariorun
+    environment:
+      API_URL: localhost:3000
+    ports:
+      - "3000:80"
+    networks:
+      - app-network
+
+  # Test runner
+  testservice:
+    image: mariotest
+    container_name: mariotest
+     depends_on:
+      - "mariorun"
+    networks:
+      - app-network
+
+# Docker Networks
+networks:
+  app-network:
+    driver: bridge
