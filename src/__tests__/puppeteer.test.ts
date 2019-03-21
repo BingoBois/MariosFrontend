@@ -1,7 +1,7 @@
 import * as puppeteer from 'puppeteer';
 import itemStore from '../stores/ItemStore';
 
-const URL = 'http://localhost:3000';
+const FRONT_URL = 'http://localhost:3000';
 let page: puppeteer.Page;
 let browser: puppeteer.Browser;
 
@@ -20,12 +20,12 @@ afterAll(() => {
 
 describe(`Testing marios pizza with puppeteer`, () => {
   test(`Test page loads`, async () => {
-    await page.goto(URL);
+    await page.goto(FRONT_URL);
     expect(await itemExists('.merio')).toBe(true);
   });
 
   test(`Test add to cart`, async () => {
-    await page.goto(URL);
+    await page.goto(FRONT_URL);
     const waitResult = await itemExists(`.addcartbutton1`) && await itemExists(`.cartcard`);
     expect(waitResult).toBe(true);
     // Check cart is empty

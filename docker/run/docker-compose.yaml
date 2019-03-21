@@ -1,0 +1,37 @@
+version: '3'
+services:
+  # MySQL Service
+  image: mymysql
+  ports:
+   - "3306:3306"
+  environment:
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_USER: sammy
+    MYSQL_PASSWORD: password
+    MYSQL_DATABASE: test08
+  networks:
+    - app-network
+
+  # Backend
+  backend:
+    image: marioback
+    container_name: marioback
+    ports:
+      - "3000:3001"
+
+  # Frontend
+  frontend:
+    image: mariorun
+    container_name: mariorun
+    environment:
+      API_URL: localhost:3001
+    ports:
+      - "3000:80"
+    networks:
+      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+
