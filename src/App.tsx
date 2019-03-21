@@ -20,7 +20,7 @@ class App extends React.Component {
       <div className="App">
         <Grid container={true} spacing={8}>
           <Grid item={true} md={6} xs={12}>
-            <img src="/assets/merio.png" height="100" width="300"/>
+            <img className='merio' src="/assets/merio.png" height="100" width="300"/>
             <ItemList />
           </Grid>
           <Grid item={true} md={6} xs={12}>

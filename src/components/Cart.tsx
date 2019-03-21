@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { observer } from 'mobx-react';
 import * as React from 'react';
+import { sendOrder } from '../api/PizzaApi';
 import itemStore from '../stores/ItemStore';
 import CartItem from './CartItem';
 
@@ -16,9 +17,14 @@ export default class Cart extends React.Component{
     phoneNumber: ""
   }
 
-  public handleCheckoutClick(){
-    // tslint:disable-next-line:no-console
-    console.log("Checkout ez");
+  public handleCheckoutClick = async () => {
+    if(itemStore.cartList.length === 0 || !this.state.name || !this.state.phoneNumber){
+      alert('Please fill out the fields, and don\'t have an empty cart!');
+    }
+    else{
+      const response = await sendOrder(this.state.name, this.state.phoneNumber, itemStore.cartList);
+      alert(response);
+    }
   }
 
   public nameHandleChange = (event: any) => {
@@ -35,7 +41,7 @@ export default class Cart extends React.Component{
     });
 
     return(
-      <Card className="card" style={{width: 400}}>
+      <Card className="cartcard" style={{width: 400}}>
         <CardContent>
           <Typography gutterBottom={true} variant="h5" component="h2">
             Personal Information:
@@ -59,10 +65,12 @@ export default class Cart extends React.Component{
           <Typography gutterBottom={true} variant="h5" component="h2">
             Cart Content:
           </Typography>
-          {foodItems}
+          <div className="cartitems">
+            {foodItems}
+          </div>
         </CardContent>
         <CardActions>
-        <Button size="small">Check Out</Button>
+        <Button size="small" onClick={this.handleCheckoutClick}>Check Out</Button>
         </CardActions>
       </Card>
     );

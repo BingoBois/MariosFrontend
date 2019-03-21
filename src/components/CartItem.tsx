@@ -19,10 +19,10 @@ export default class CartItem extends React.Component<ICartItemProps, {}>{
 
   public render(){
     return(
-      <div>
+      <div className={`cartitem${this.props.index}`}>
         <span>({this.props.itemId}) {this.props.itemName}: {this.props.itemPrice},-</span>
         <IconButton
-          className="addcartbutton"
+          className="removefromcartbutton"
           onClick={this.removeClick}>
           <RemoveCartIcon />
         </IconButton>
