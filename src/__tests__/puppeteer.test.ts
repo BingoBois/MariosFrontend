@@ -10,7 +10,7 @@ jest.setTimeout(8000);
 itemStore.addToProductList({id: 1, itemDescription: "Sue", itemName: "Pizzaen", price: 85});
 
 beforeAll(async () => {
-  browser = await puppeteer.launch({headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox']});
+  browser = await puppeteer.launch({headless: false, slowMo: 0, args: ['--no-sandbox', '--disable-setuid-sandbox']});
   page = await browser.newPage();
 });
 
@@ -35,6 +35,16 @@ describe(`Testing marios pizza with puppeteer`, () => {
     // Check cart isn't empty
     expect(await getCartContentLength()).toBe(1);
   });
+
+  test(`Can enter admin login`, async () => {
+    await page.goto(URL);
+    const waitResult = await itemExists(`.addcartbutton1`) && await itemExists(`.cartcard`);
+    expect(waitResult).toBe(true);
+    await page.type('#standard-name', 'IAmAdmin');
+    const loadedAdmin = await itemExists('.adminLoginButton');
+    expect(loadedAdmin).toBe(true);
+  });
+
 });
 
 async function getCartContentLength(){

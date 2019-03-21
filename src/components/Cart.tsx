@@ -10,8 +10,17 @@ import { sendOrder } from '../api/PizzaApi';
 import itemStore from '../stores/ItemStore';
 import CartItem from './CartItem';
 
+interface ICartProps {
+    nameChangeCallback: (name: string) => void
+}
+
+interface ICartState {
+    name: string, 
+    phoneNumber: string
+}
+
 @observer
-export default class Cart extends React.Component{ 
+export default class Cart extends React.Component<ICartProps, ICartState> { 
   public state = {
     name: "",
     phoneNumber: ""
@@ -28,7 +37,9 @@ export default class Cart extends React.Component{
   }
 
   public nameHandleChange = (event: any) => {
-    this.setState({name: event.target.value });
+    this.setState({name: event.target.value }, () => {
+        this.props.nameChangeCallback(this.state.name);
+    });
   };
 
   public phoneNumberHandleChange = (event: any) => {

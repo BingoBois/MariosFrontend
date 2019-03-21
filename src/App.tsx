@@ -1,13 +1,32 @@
 import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 import { observer } from 'mobx-react';
 import * as React from 'react';
-import { retrieveItemList } from './api/PizzaApi';
+import { adminLogin, IFoodOrder, retrieveAdminList, retrieveItemList } from './api/PizzaApi';
 import Cart from './components/Cart';
 import ItemList from './components/ItemList';
+import OrderRow from './components/OrderRow';
 import itemStore from './stores/ItemStore';
 
+const SUPER_SECRET_PASSWORD = "IAmAdmin";
+
+interface IAppState {
+    admin: string | undefined,
+    adminList: IFoodOrder[],
+    password: string,
+    username: string
+}
+
 @observer
-class App extends React.Component {
+class App extends React.Component<{}, IAppState> {
+
+    public state = {
+        admin: "9786e07cae16c54f2a2a17f6754e22d795d001f4b99044fb9694e5ef6f761f8d",
+        adminList: [],
+        password: "",
+        username: ""
+    }
+
   public async componentWillMount(){
     const fetchedItems = await retrieveItemList();
     fetchedItems.forEach((e) => {
@@ -15,7 +34,92 @@ class App extends React.Component {
     });
   }
 
+  public handleNameChange = (name: string) => {
+    // tslint:disable-next-line:no-console
+    console.log(name);
+    if (name === SUPER_SECRET_PASSWORD) {
+        this.setState({
+            admin: "login"
+        });
+    }
+  }
+
+  public backFromLogin = () => {
+    this.setState({
+        admin: undefined
+    })
+  }
+
+  public usernameHandleChange = (e: any) => {
+    this.setState({
+        username: e.target.value
+    })
+  }
+
+  public passwordHandleChange = (e: any) => {
+    this.setState({
+        password: e.target.value
+    })
+  }
+
+  public clickLogin = async () => {
+    const result = await adminLogin(this.state.username, this.state.password);
+    // tslint:disable-next-line:no-console
+    this.setState({
+        admin: result.token
+    }, async () => {
+        if (this.state.admin) {
+            this.setState({
+                adminList: await retrieveAdminList(this.state.admin)
+            })
+        }
+    });
+  }
+
   public render() {
+    if (this.state.admin === "login") {
+        return (
+            <div>
+                <button onClick={this.backFromLogin}>
+                    Back
+                </button>
+                <TextField
+                    id="standard-name"
+                    label="Username"
+                    className="usernameTextBox"
+                    value={this.state.username}
+                    onChange={this.usernameHandleChange}
+                    margin="normal"
+                    />
+                <TextField
+                    id="standard-name"
+                    label="Password"
+                    className="passwordTextBox"
+                    value={this.state.password}
+                    onChange={this.passwordHandleChange}
+                    margin="normal"
+                />
+                <button className="adminLoginButton" onClick={this.clickLogin}>
+                    Login
+                </button>
+            </div>
+        )
+    } else if (this.state.admin) {
+        // @ts-ignore
+        const mapped = this.state.adminList.map((item: IFoodOrder, index) => {
+            return (
+                <OrderRow key={index} foodOrder={item} />
+            )
+        });
+        return (
+            <div>
+                <button onClick={this.backFromLogin}>
+                    Back
+                </button>
+                {mapped}
+            </div>
+        )
+    }
     return (
       <div className="App">
         <Grid container={true} spacing={8}>
@@ -25,7 +129,7 @@ class App extends React.Component {
           </Grid>
           <Grid item={true} md={6} xs={12}>
             <img src="/assets/cart.jpg" height="100" width="300"/>
-            <Cart />
+            <Cart nameChangeCallback={this.handleNameChange} />
           </Grid>
         </Grid>
       </div>
