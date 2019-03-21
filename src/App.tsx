@@ -23,7 +23,7 @@ class App extends React.Component<{}, IAppState> {
     public state = {
         admin: "9786e07cae16c54f2a2a17f6754e22d795d001f4b99044fb9694e5ef6f761f8d",
         adminList: [],
-        password: "",
+        password: "" || "123",
         username: ""
     }
 

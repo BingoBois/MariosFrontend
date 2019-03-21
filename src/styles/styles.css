@@ -1,0 +1,17 @@
+@keyframes yourAnimation{
+    0%{
+        transform: rotate(0deg);
+        opacity: 1;
+        }
+    100%{
+        transform: rotate(360deg);
+        opacity: 1;
+        }
+}
+
+.orderCard{
+    animation: yourAnimation 40s infinite 0s linear;
+    border: 2px solid black;
+    max-width: 300px;
+    margin-left: 100px;
+}

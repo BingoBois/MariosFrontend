@@ -14,7 +14,7 @@ export default class OrderRow extends React.Component<{foodOrder: IFoodOrder}, {
           )
       });
     return(
-      <div>
+      <div className="orderCard">
           <p>{this.props.foodOrder.name}, phone: {this.props.foodOrder.phone}</p>
           {mapped}
           <p>Total: {total}</p>

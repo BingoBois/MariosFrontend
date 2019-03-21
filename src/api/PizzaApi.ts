@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 import Item from '../types/Item';
-const API_URL = "http://83.88.66.128:3000";
+
+const API_URL = "http://83.88.66.128:3000"; // process.env.API_URL || "localhost:3001";
 
 interface ILoginResponse {
     email: string;
@@ -44,12 +45,21 @@ export async function sendOrder(name: string, phoneNumber: string, itemList: Ite
 }
 
 export async function adminLogin(username: string, password: string) {
+
+    const testBody = {
+        "password": "1234",
+        "username": "duskalbrugedocker@sut.dk",
+    }
+
+    /*
     const body = {
         "password": password, // "1234",
         "username": username, // "duskalbrugedocker@sut.dk",
     }
+    */
+
     const response = await fetch(API_URL + "/api/login", {
-        body: JSON.stringify(body),
+        body: JSON.stringify(testBody),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -67,7 +77,7 @@ export async function retrieveAdminList(token: string) {
     const body = {
         token
     }
-    const response = await fetch(API_URL + "/api/getItems", {
+    const response = await fetch(API_URL + "/api/getOrders", {
         body: JSON.stringify(body),
         headers: {
         'Content-Type': 'application/json',
