@@ -1,7 +1,7 @@
 import * as puppeteer from 'puppeteer';
 import itemStore from '../stores/ItemStore';
 
-const FRONT_URL = process.env.FRONT_URL || 'http://localhost:3000';
+const FRONT_URL = "http://134.209.235.108:3000"; // process.env.FRONT_URL || 'http://localhost:3000';
 let page: puppeteer.Page;
 let browser: puppeteer.Browser;
 
