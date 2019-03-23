@@ -5,7 +5,7 @@ const FRONT_URL = process.env.FRONT_URL || 'http://localhost:3000';
 let page: puppeteer.Page;
 let browser: puppeteer.Browser;
 
-jest.setTimeout(8000);
+// jest.setTimeout(8000);
 // Mock data
 itemStore.addToProductList({id: 1, itemDescription: "Sue", itemName: "Pizzaen", price: 85});
 
