@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import Item from '../types/Item';
 
-const API_URL = "http://83.88.66.128:3000"; // process.env.API_URL || "localhost:3001";
+const API_URL = "http://134.209.235.108:3001"; // process.env.API_URL || "localhost:3001";
 
 interface ILoginResponse {
     email: string;

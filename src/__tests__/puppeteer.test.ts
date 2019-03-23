@@ -10,7 +10,7 @@ jest.setTimeout(8000);
 itemStore.addToProductList({id: 1, itemDescription: "Sue", itemName: "Pizzaen", price: 85});
 
 beforeAll(async () => {
-  browser = await puppeteer.launch({headless: false, slowMo: 0, args: ['--no-sandbox', '--disable-setuid-sandbox']});
+  browser = await puppeteer.launch({headless: true, slowMo: 0, args: ['--no-sandbox', '--disable-setuid-sandbox']});
   page = await browser.newPage();
 });
 
