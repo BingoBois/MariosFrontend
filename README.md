@@ -16,7 +16,7 @@ Two Dockerfiles are available, one for running the Puppeteer tests, and 1 for ru
 2. Run the test docker-compose file(in docker/test) `cd docker/test && sudo docker-compose up`
 
 ### Run Frontend/Backend
-1. 1. Cleanup `sudo docker system prune -f && sudo docker-compose stop`
+1. leanup `sudo docker system prune -f && sudo docker-compose stop`
 2. Run the full docker-compose script(in docker/run) `cd ../run && sudo docker-compose up`
 
 ### Cleanup
@@ -24,21 +24,29 @@ Two Dockerfiles are available, one for running the Puppeteer tests, and 1 for ru
 
 ## Run Manually
 ### Setup
-1. Install NPM & Typescript
-2. `npm install`
+1. Install NPM
+2. Run `npm install` in root directory
 
 ### Run Tests
-1. `npm test`
+Make sure you followed the setup steps
+1. Run `npm start`
+1. Open a new terminal window and run `npm test`
 
 ### Run Frontend
-1. `npm start`
+Make sure you followed the setup steps
+1. Run `npm start`
 
 
 ## Tests Themselves Described
 Puppeteer is like Selenium and is made for functional testing like clicking on webpages, and seeing the changes.
-Requires ... etc
+Since this is a functional test, or a behaviour test, it is slower than a unit test, and will need more setup. For the test itself, it starts the system with docker-compose, and then runs the tests aftewards.
+
+For running the project itself, a docker-compose file is also available.
 
 
 
 ## Extras
 Backend repo: https://github.com/BingoBois/MariosBackend
+
+## Image
+
